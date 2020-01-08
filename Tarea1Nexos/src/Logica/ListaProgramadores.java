@@ -2,57 +2,45 @@
  * 
  */
 package Logica;
-import Dominio.Programador;
+import Dominio.*;
 
 /**
  * @author ssp013
  *
  */
 public class ListaProgramadores {
-
-	/**
-	 * 
-	 */
-	private Programador [] Lp;
-	private int cant;
-	private int max;
-	public ListaProgramadores(int max) {
-		// TODO Auto-generated constructor stub
-		Lp = new Programador [max];
-		cant = 0;
-		this.max = max;
+	private NodoProgramador first;//first, es referente al primer nodo de la lista.
+	public ListaProgramadores() {//Constructor
+		first = null;//No hay nodos en la lista toavía.
 	}
-	public boolean ingresarProgramador(Programador programador) {
-		boolean resp = false;
-		if(cant<max) {
-			Lp[cant]= programador;
-			cant++;
-			resp=true;
-		}
-		return resp;
+	public void insertarPrimer(Programador p) {
+		NodoProgramador newNodo = new NodoProgramador(p);//Creamos un nuevo NODO.
+		newNodo.setNext(first);//apunta al antiguo
+		first = newNodo;//ahora el nuevo Nodo queda como First.
 	}
-	public Programador buscarProgramador(String Rut) {
-		int k;
-		for(k=0;k<max;k++) {
-			if(Lp[k].getRut().equals(Rut)) {
-				break;
+	public NodoProgramador getFirst() {
+		return first;
+	}
+	@Override
+	public String toString() {
+		String salida="";
+		NodoProgramador actual = first;
+		while(actual!=null) {
+			Programador programador = actual.getProgramador();
+			if(programador instanceof Novato) {
+				String rut = programador.getRut();
+				int sueldo = programador.calcularSueldo();
+				int cantidadLenguajes = ((Novato) programador).getLenguaje();
+				salida= salida +" Programador Novato --> Rut : "+rut+", Sueldo: "+sueldo+", Cantidad Lenguajes: "+cantidadLenguajes+"\n";
+				actual = actual.getNext();//Se mueve al próximo Nodo.
+			}else if(programador instanceof Experto) {
+				String rut = programador.getRut();
+				int sueldo = programador.calcularSueldo();
+				int añosExp = ((Experto) programador).getAñosExperiencia();
+				salida = salida + " Programador Experto --> Rut : "+rut+", Sueldo: "+sueldo+", Años experiencia: "+añosExp+"\n";
+				actual = actual.getNext();
 			}
 		}
-		if(k==max) {
-			return null;
-		}else {
-			return Lp[k];
-		}
+		return salida;
 	}
-	public int getCantProg() {
-		return cant;
-	}
-	public Programador getProgramadorI(int i) {
-		if(i>=0 && i<cant) {
-			return Lp[i];
-		}else {
-			return null;
-		}
-	}
-
 }
