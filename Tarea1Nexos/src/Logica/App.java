@@ -53,21 +53,15 @@ public class App {
 			if(nivel == 1) {
 				StdOut.println("Ingrese los años de experiencia del programador "+Rut+" :");
 				int año = validarOpcion();
-				if(Sistema.ingresarExperto(Rut, SueldoFijo, año)) {
-					StdOut.println("Programador ingresado correctamente!");
-					cont++;
-				}else {
-					StdOut.println("Error: Programador ingresado incorrectamente!");
-				}
+				Sistema.ingresarExperto(Rut, SueldoFijo, año);
+				StdOut.println("Programador ingresado correctamente!");
+				cont++;
 			}else if(nivel==2) {
 				StdOut.println("Ingrese la cantidad de lenguajes que ocupa "+Rut+" :");
 				int Lenguaje = validarOpcion();
-				if(Sistema.ingresarNovato(Rut, SueldoFijo, Lenguaje)) {
-					StdOut.println("Programador ingresado correctamente!");
-					cont++;
-				}else {
-					StdOut.println("Error: Programador ingresado incorrectamente!");		
-				}
+				Sistema.ingresarNovato(Rut, SueldoFijo, Lenguaje);
+				StdOut.println("Programador ingresado correctamente!");
+				cont++;
 			}
 			StdOut.println("Ingrese rut programador Nº "+cont+" :");
 			Rut = StdIn.readString();

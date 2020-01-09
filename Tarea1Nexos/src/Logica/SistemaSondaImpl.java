@@ -15,67 +15,45 @@ public class SistemaSondaImpl implements SistemaSonda {
 	 */
 	public SistemaSondaImpl() {
 		// TODO Auto-generated constructor stub
-		this.listaProgramadores = new ListaProgramadores(100);
+		this.listaProgramadores = new ListaProgramadores();
 	}
 	@Override
-	public boolean ingresarNovato(String Rut, int SueldoFijo, int Lenguaje) {
+	public void ingresarNovato(String Rut, int SueldoFijo, int Lenguaje) {
 		// TODO Auto-generated method stub
 		Programador novato = new Novato(Rut,SueldoFijo,Lenguaje);
-		boolean ingresarProg = listaProgramadores.ingresarProgramador(novato);
-		return ingresarProg;
+		listaProgramadores.insertarPrimer(novato);
 	}
 	@Override
-	public boolean ingresarExperto(String Rut, int SueldoFijo, int año) {
+	public void ingresarExperto(String Rut, int SueldoFijo, int año) {
 		// TODO Auto-generated method stub
 		Programador experto = new Experto(Rut, SueldoFijo, año);
-		boolean ingresarProg = listaProgramadores.ingresarProgramador(experto);
-		return ingresarProg;
+		listaProgramadores.insertarPrimer(experto);
+		
 	}
 	@Override
 	public String obtenerDatosProgramadores() {
 		// TODO Auto-generated method stub
-		String texto = "\nDatos de todos los programadores\n";
-		
-		for(int i=0;i<listaProgramadores.getCantProg();i++) {
-			Programador programador = listaProgramadores.getProgramadorI(i);
-			
-			if(programador != null ) {
-			
-				if(programador instanceof Novato) {
-					String rut = programador.getRut();
-					int sueldo = programador.calcularSueldo();
-					int cantidadLenguajes = ( (Novato) programador).getLenguaje();
-					texto= texto +" Programador Novato --> Rut : "+rut+", Sueldo: "+sueldo+", Cantidad Lenguajes: "+cantidadLenguajes+"\n";
-					
-				}else if(programador instanceof Experto) {
-					String rut = programador.getRut();
-					int sueldo = programador.calcularSueldo();
-					int añosExperiencia = ((Experto) programador).getAñosExperiencia();
-					texto = texto + " Programador Experto --> Rut : "+rut+", Sueldo: "+sueldo+", Años experiencia: "+añosExperiencia+"\n";
-				}
-			}
-		}
-		return texto;
+		return listaProgramadores.toString();
 	}
 	@Override
 	public String obtenerDatosNovatos() {
-		// TODO Auto-generated method stub
-		String texto = "";
+		String salida="";
 		int CantNovatos =0;
 		int sumaLenguajes=0;
-		for(int i=0;i<listaProgramadores.getCantProg();i++) {
-			Programador programador = listaProgramadores.getProgramadorI(i);
-			if(programador != null ) {
-				if(programador instanceof Novato) {
-					int cantidadLenguajes = ( (Novato) programador).getLenguaje();
-					sumaLenguajes+=cantidadLenguajes;
-					CantNovatos+=1;		
-				}
+		NodoProgramador actual = listaProgramadores.getFirst();
+		while(actual!=null) {
+			Programador programador = actual.getProgramador();
+			if(programador instanceof Novato) {
+				String rut = programador.getRut();
+				int sueldo = programador.calcularSueldo();
+				int cantidadLenguajes = ((Novato) programador).getLenguaje();
+				sumaLenguajes+=cantidadLenguajes;
+				CantNovatos+=1;	
+				actual = actual.getNext();//Se mueve al próximo Nodo.
 			}
 		}
 		double promedio = sumaLenguajes/CantNovatos;
-		texto = "La Cantidad de programadores novatos es "+CantNovatos+" y el promedio de lenguajes es "+ promedio;		
-		return texto;
+		salida = salida+"La Cantidad de programadores novatos es "+CantNovatos+" y el promedio de lenguajes es "+ promedio;		
+		return salida;
 	}
-
 }
