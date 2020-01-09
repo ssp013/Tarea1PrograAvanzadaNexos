@@ -49,9 +49,4 @@ public abstract class  Programador {
 		SueldoFijo = sueldoFijo;
 	}
 	abstract public int calcularSueldo();
-
-	@Override
-	public String toString() {
-		return "Programador [Rut=" + Rut + ", SueldoFijo=" + SueldoFijo + "]";
-	}
 }

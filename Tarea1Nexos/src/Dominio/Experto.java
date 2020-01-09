@@ -42,10 +42,6 @@ public class Experto extends Programador{
 		return montoFinal;
 	}
 
-	@Override
-	public String toString() {
-		return "Programador Experto [ añosExperiencia = " + añosExperiencia + "]";
-	}
-	
+
 
 }

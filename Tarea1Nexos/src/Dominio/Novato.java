@@ -43,10 +43,7 @@ public class Novato extends Programador{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Programador Novato [ Cantidad de Lenguaje = " + Lenguaje + "]";
-	}
+
 	
 
 }
