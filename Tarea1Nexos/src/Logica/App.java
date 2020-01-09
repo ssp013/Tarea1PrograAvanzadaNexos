@@ -40,7 +40,7 @@ public class App {
 		
 		//Preguntamos los datos del programador:
 		int cont=1;
-		StdOut.println("Ingrese rut programador Nº "+cont+" :");
+		StdOut.println("Ingrese rut programador Nº "+cont+". Fin programadores rut=fin");
 		String Rut = StdIn.readString();
 		//Iniciamos bucle:
 		while(!Rut.equals("fin")) {
@@ -63,12 +63,14 @@ public class App {
 				StdOut.println("Programador ingresado correctamente!");
 				cont++;
 			}
-			StdOut.println("Ingrese rut programador Nº "+cont+" :");
+			StdOut.println("Ingrese rut programador Nº "+cont+" . Fin programadores rut=fin");
 			Rut = StdIn.readString();
 		}
 		StdOut.println("Fin de ingreso de datos!");
 		//Desplegamos los datos de los programadores:
+		StdOut.println("****** Datos todos los Programadores ***********");
 		desplegarDatosDeLosProgramadores(Sistema);
+		StdOut.println("****** Datos Programadores Novatos ***********");
 		desplegarDatosNovatos(Sistema);
 	}
 	/**
